@@ -12,5 +12,6 @@ class DependenciesJsonPluginTest {
         Project project = ProjectBuilder.builder().build();
         project.getPlugins().apply("dev.mbo.djp.dependencies-json");
         assertNotNull(project.getTasks().findByName("dependencies-json"));
+        assertNotNull(project.getTasks().findByName("dependencies-json-upload"));
     }
 }

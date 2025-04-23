@@ -16,7 +16,7 @@ repositories {
 
 testing {
     suites {
-        val test by getting(JvmTestSuite::class) {
+        @Suppress("unused") val test by getting(JvmTestSuite::class) {
             // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter
             useJUnitJupiter("5.12.2")
             dependencies {
@@ -24,7 +24,7 @@ testing {
                 implementation("org.jetbrains.kotlin:kotlin-test-junit5")
             }
         }
-        val functionalTest by registering(JvmTestSuite::class) {
+        @Suppress("unused") val functionalTest by registering(JvmTestSuite::class) {
             dependencies {
                 implementation(project())
                 dependencies {
@@ -34,7 +34,10 @@ testing {
             }
             targets {
                 all {
-                    testTask.configure { shouldRunAfter(test) }
+                    testTask.configure {
+                        dependsOn(tasks.named("publishToMavenLocal"))
+                        shouldRunAfter(tasks.named("test"))
+                    }
                 }
             }
         }
@@ -42,7 +45,7 @@ testing {
 }
 
 gradlePlugin {
-    val dependenciesJson by plugins.creating {
+    @Suppress("unused") val dependenciesJson by plugins.creating {
         id = "dev.mbo.djp.dependencies-json"
         displayName = "Dependencies JSON Plugin"
         description = "Outputs resolved dependencies as JSON grouped by configuration"
@@ -56,7 +59,6 @@ gradlePlugin {
 }
 
 gradlePlugin.testSourceSets.add(sourceSets["functionalTest"])
-
 tasks.named<Task>("check") {
     dependsOn(testing.suites.named("functionalTest"))
 }

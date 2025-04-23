@@ -12,6 +12,7 @@
 - 📄 Grouped by configuration (`implementation`, `test`, etc.)
 - 💾 Exports to a customizable JSON file
 - ⚡ Lightweight, fast, and zero dependencies
+- ⬆️ Http POST the generated file to a configurable server with optional basic credentials.
 
 ---
 
@@ -31,6 +32,8 @@ plugins {
 
 ### ⚙️ Usage
 
+#### dependencies-json
+
 Run the task from the command line:
 
 ```bash
@@ -43,11 +46,40 @@ By default, the plugin will generate a file at:
 <project-root>/build/dependencies.json
 ```
 
+#### dependencies-json-upload
+
+The upload task can be run with:
+
+```bash
+./gradlew dependencies-json-upload
+```
+
+with a mandatory configuration where you set the server:
+
+```kotlin
+dependenciesJson {
+  postUrl.set("URL to post the file to as application/json")
+}
+```
+
+You can set credentials by using environment variables:
+ - `DJP_HTTP_USER`: username
+ - `DJP_HTTP_PASS`: password
+
+Both need to be present so that they get used. This adds an Authorization header like:
+
+```text
+Authorization: Basic base64encoded(username:password)
+```
+
+This is automatically using the generated file from `dependencies-json` and if that isn't run before
+this is done automatically.
+
 ---
 
 ### 🧩 Configuration
 
-You can customize the output location using the `dependenciesJson` extension:
+You can customize the file output location of `dependencies-json` using the `dependenciesJson` extension:
 
 ```kotlin
 dependenciesJson {
