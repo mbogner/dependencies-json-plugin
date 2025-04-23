@@ -53,6 +53,7 @@ dependencies {
 
         assertTrue(fileContent.contains("\"name\":"), "Expected to include 'name:'")
         assertTrue(fileContent.contains("\"version\":"), "Expected to include 'version:'")
+        assertTrue(fileContent.contains("\"timestamp\":"), "Expected to include 'timestamp:'")
         assertTrue(fileContent.contains("\"dependencies\":"), "Expected to include 'dependencies:'")
 
         // guava needs to be inside because we defined it
