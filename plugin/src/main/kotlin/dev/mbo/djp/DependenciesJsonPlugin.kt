@@ -86,7 +86,7 @@ class DependenciesJsonPlugin : Plugin<Project> {
 
                 val responseCode = connection.responseCode
                 if (responseCode in 200..299) {
-                    project.logger.lifecycle("Successfully posted dependencies JSON.")
+                    project.logger.info("Successfully posted dependencies JSON to $serverUrl.")
                 } else {
                     throw RuntimeException("Failed to post dependencies JSON. Server responded with status code: $responseCode")
                 }
