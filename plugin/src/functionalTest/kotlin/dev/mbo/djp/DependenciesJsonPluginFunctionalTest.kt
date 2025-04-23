@@ -49,7 +49,14 @@ dependencies {
         assertEquals(TaskOutcome.SUCCESS, result.task(":dependencies-json")?.outcome)
         val outputFile = File(testProjectDir, "build/dependencies.json")
         assertTrue(outputFile.exists(), "Expected file ${outputFile.path} to exist")
-        assertTrue(outputFile.readText().contains("guava"), "Expected output to contain 'guava'")
+        val fileContent = outputFile.readText()
+
+        assertTrue(fileContent.contains("\"name\":"), "Expected to include 'name:'")
+        assertTrue(fileContent.contains("\"version\":"), "Expected to include 'version:'")
+        assertTrue(fileContent.contains("\"dependencies\":"), "Expected to include 'dependencies:'")
+
+        // guava needs to be inside because we defined it
+        assertTrue(fileContent.contains("guava"), "Expected output to contain 'guava'")
         // also check log message to exist
         assertTrue(result.output.contains("Wrote dependency JSON"), "Expected log message not found!")
     }

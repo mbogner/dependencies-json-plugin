@@ -1,5 +1,6 @@
 package dev.mbo.djp
 
+import dev.mbo.djp.model.ProjectDto
 import groovy.json.JsonOutput
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -38,7 +39,8 @@ class DependenciesJsonPlugin : Plugin<Project> {
                                     "file" to artifact.file.name
                                 )
                             }
-                        } catch (_: Exception) {
+                        } catch (e: Exception) {
+                            project.logger.error("resolving dependencies failed", e)
                         }
                         if (deps.isNotEmpty()) {
                             result[config.name] = deps
@@ -46,9 +48,15 @@ class DependenciesJsonPlugin : Plugin<Project> {
                     }
                 }
 
+                val projectDto = ProjectDto(
+                    name = project.name,
+                    version = project.version.toString(),
+                    dependencies = result,
+                )
+
                 val outputFile: File = extension.outputFile.get().asFile
                 outputFile.parentFile.mkdirs()
-                outputFile.writeText(JsonOutput.prettyPrint(JsonOutput.toJson(result)))
+                outputFile.writeText(JsonOutput.prettyPrint(JsonOutput.toJson(projectDto)))
                 project.logger.lifecycle("Wrote dependency JSON to ${outputFile.absolutePath}")
             }
         }
