@@ -2,7 +2,8 @@
 
 [![Gradle Plugin Portal](https://img.shields.io/gradle-plugin-portal/v/dev.mbo.djp.dependencies-json)](https://plugins.gradle.org/plugin/dev.mbo.djp.dependencies-json)
 
-> A Gradle plugin to export resolved dependencies as a neatly formatted JSON file — grouped by configuration (e.g., `implementation`, `testImplementation`, etc.)
+> A Gradle plugin to export resolved dependencies as a neatly formatted JSON file — grouped by configuration (e.g.,
+`implementation`, `testImplementation`, etc.)
 
 ---
 
@@ -13,6 +14,8 @@
 - 💾 Exports to a customizable JSON file
 - ⚡ Lightweight, fast, and zero dependencies
 - ⬆️ Http POST the generated file to a configurable server with optional basic credentials.
+- ⬆️ There is also a spring boot api to receive the json file content sent with the plugin.
+  See [dependencies-json-server](https://github.com/mbogner/dependencies-json-server)
 
 ---
 
@@ -22,11 +25,12 @@
 
 ```kotlin
 plugins {
-    id("dev.mbo.djp.dependencies-json") version("1.0.0")
+    id("dev.mbo.djp.dependencies-json") version ("1.0.0")
 }
 ```
 
-> 📦 The plugin is available from the [Gradle Plugin Portal](https://plugins.gradle.org/plugin/dev.mbo.djp.dependencies-json)
+> 📦 The plugin is available from
+> the [Gradle Plugin Portal](https://plugins.gradle.org/plugin/dev.mbo.djp.dependencies-json)
 
 ---
 
@@ -58,13 +62,14 @@ with a mandatory configuration where you set the server:
 
 ```kotlin
 dependenciesJson {
-  postUrl.set("URL to post the file to as application/json")
+    postUrl.set("URL to post the file to as application/json")
 }
 ```
 
 You can set credentials by using environment variables:
- - `DJP_HTTP_USER`: username
- - `DJP_HTTP_PASS`: password
+
+- `DJP_HTTP_USER`: username
+- `DJP_HTTP_PASS`: password
 
 Both need to be present so that they get used. This adds an Authorization header like:
 
@@ -148,7 +153,8 @@ see [LICENSE.txt](LICENSE.txt)
 
 ## 💬 Feedback
 
-Have an idea or found a bug? [Open an issue](https://github.com/mbogner/dependencies-json-plugin/issues) or contribute a PR!
+Have an idea or found a bug? [Open an issue](https://github.com/mbogner/dependencies-json-plugin/issues) or contribute a
+PR!
 
 ## Release
 
