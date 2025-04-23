@@ -117,3 +117,13 @@ see [LICENSE.txt](LICENSE.txt)
 ## 💬 Feedback
 
 Have an idea or found a bug? [Open an issue](https://github.com/mbogner/dependencies-json-plugin/issues) or contribute a PR!
+
+## Release
+
+```shell
+./gradlew release \
+  -Prelease.useAutomaticVersion=true \
+  -Prelease.releaseVersion=1.0.0 \
+  -Prelease.newVersion=1.0.1-SNAPSHOT \
+  --no-configuration-cache
+```
