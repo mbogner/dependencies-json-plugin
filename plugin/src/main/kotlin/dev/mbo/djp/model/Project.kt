@@ -4,6 +4,7 @@ import java.time.Instant
 import java.time.format.DateTimeFormatter
 
 data class ProjectDto(
+    val group: String,
     val name: String,
     val version: String,
     val dependencies: Map<String, List<Map<String, String>>>,

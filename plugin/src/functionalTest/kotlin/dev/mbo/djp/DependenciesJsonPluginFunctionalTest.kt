@@ -51,6 +51,7 @@ dependencies {
         assertTrue(outputFile.exists(), "Expected file ${outputFile.path} to exist")
         val fileContent = outputFile.readText()
 
+        assertTrue(fileContent.contains("\"group\":"), "Expected to include 'group:'")
         assertTrue(fileContent.contains("\"name\":"), "Expected to include 'name:'")
         assertTrue(fileContent.contains("\"version\":"), "Expected to include 'version:'")
         assertTrue(fileContent.contains("\"timestamp\":"), "Expected to include 'timestamp:'")

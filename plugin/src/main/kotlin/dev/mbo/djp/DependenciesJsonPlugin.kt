@@ -49,6 +49,7 @@ class DependenciesJsonPlugin : Plugin<Project> {
                 }
 
                 val projectDto = ProjectDto(
+                    group = project.group.toString(),
                     name = project.name,
                     version = project.version.toString(),
                     dependencies = result,
